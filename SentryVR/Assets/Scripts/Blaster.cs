@@ -54,11 +54,11 @@ public class Blaster : MonoBehaviour
             Fire();
         }
 
-        if (m_FireAction.GetStateUp(m_Pose.inputSource))
-        {
-            m_Animator.SetBool("Fire", true);
-            Fire();
-        }
+       if (m_FireAction.GetStateUp(m_Pose.inputSource))
+       {
+            m_Animator.SetBool("Fire", false);
+            
+       }
 
         if (m_ReloadAction.GetStateDown(m_Pose.inputSource))
         {
