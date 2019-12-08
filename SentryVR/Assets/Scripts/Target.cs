@@ -6,19 +6,22 @@ public class Target : MonoBehaviour
 {
     public Color m_FlashDamageColor = Color.white;
 
-    private MeshRenderer m_MeshRenderer = null;
+    protected MeshRenderer m_MeshRenderer = null;
 
-    private Color m_OriginalColor = Color.white;
+    protected Color m_OriginalColor = Color.white;
 
    
     public int m_MaxHealth;
     
     public int m_Health;
 
+    public Rigidbody m_rigidbody;
+
     protected void Awake()
     {
         m_MeshRenderer = GetComponent<MeshRenderer>();
         m_OriginalColor = m_MeshRenderer.material.color;
+        m_rigidbody = GetComponent<Rigidbody>();
     }
 
     protected void OnEnable()
