@@ -10,22 +10,24 @@ public class Target : MonoBehaviour
 
     private Color m_OriginalColor = Color.white;
 
-    private int m_MaxHealth = 2;
+   
+    public int m_MaxHealth;
+    
+    public int m_Health;
 
-    private int m_Health = 0;
-
-    private void Awake()
+    protected void Awake()
     {
         m_MeshRenderer = GetComponent<MeshRenderer>();
         m_OriginalColor = m_MeshRenderer.material.color;
     }
 
-    private void OnEnable()
+    protected void OnEnable()
     {
+        m_Health = m_MaxHealth;
         ResetHealth();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Projectile"))
         {
@@ -33,16 +35,15 @@ public class Target : MonoBehaviour
         }
     }
 
-    private void Damage()
+    protected void Damage()
     {
         StopAllCoroutines();
         StartCoroutine(Flash());
-
         RemoveHealth();
 
     }
 
-    private IEnumerator Flash()
+    protected IEnumerator Flash()
     {
         m_MeshRenderer.material.color = m_FlashDamageColor;
 
@@ -52,19 +53,19 @@ public class Target : MonoBehaviour
         m_MeshRenderer.material.color = m_OriginalColor;
     }
 
-    private void RemoveHealth()
+    protected void RemoveHealth()
     {
         m_Health--;
         CheckForDeath();
     }
 
-    private void ResetHealth()
+    protected void ResetHealth()
     {
         m_Health = m_MaxHealth;
 
     }
 
-    private void CheckForDeath()
+    protected void CheckForDeath()
     {
         if (m_Health <= 0)
         {
@@ -72,7 +73,7 @@ public class Target : MonoBehaviour
         }
     }
 
-    private void Kill()
+    protected void Kill()
     {
         gameObject.SetActive(false);
     }
