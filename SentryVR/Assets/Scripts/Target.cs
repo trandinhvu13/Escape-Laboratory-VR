@@ -15,13 +15,13 @@ public class Target : MonoBehaviour
     
     public int m_Health;
 
-    public Rigidbody m_rigidbody;
+    public GameObject mainObject;
 
     protected void Awake()
     {
-        m_MeshRenderer = GetComponent<MeshRenderer>();
+        m_MeshRenderer = mainObject.GetComponent<MeshRenderer>();
         m_OriginalColor = m_MeshRenderer.material.color;
-        m_rigidbody = GetComponent<Rigidbody>();
+        
     }
 
     protected void OnEnable()
@@ -46,7 +46,7 @@ public class Target : MonoBehaviour
 
     }
 
-    protected IEnumerator Flash()
+    protected virtual IEnumerator Flash()
     {
         m_MeshRenderer.material.color = m_FlashDamageColor;
 

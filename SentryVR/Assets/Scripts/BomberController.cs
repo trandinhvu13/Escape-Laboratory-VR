@@ -74,14 +74,16 @@ public class BomberController : Target
             {
                 Debug.Log("Toi da thay" + hit.collider.tag);
                 Chase();
+            }else if (isDetected == true && !hit.collider.CompareTag("Player"))
+            {
+                StartCoroutine("KeppTrackTarget");
+            }else
+            {
+                Wander();
             }
 
         }
-        else
-        {
-            isDetected = false;
-            Wander();
-        }
+        
 
     }
 
@@ -126,7 +128,7 @@ public class BomberController : Target
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("I collide player");
+            agent.isStopped = true;
             StartCoroutine("Explode");
         } else if (collision.gameObject.CompareTag("Projectile"))
         {
@@ -135,6 +137,18 @@ public class BomberController : Target
         }
         
     }
+    protected IEnumerator KeppTrackTarget()
+    {
+        agent.SetDestination(target.position);
+        Debug.Log("Still chase");
+        Debug.Log("phat hien" + isDetected);
+        WaitForSeconds wait = new WaitForSeconds(2.5f);
+        yield return wait;
+        isDetected = false;
+        Debug.Log("phat hien2" + isDetected);
+        Wander();
+    }
+
     protected IEnumerator Explode()
     {
         InvokeRepeating("Blink", 0f, 0.2f);
