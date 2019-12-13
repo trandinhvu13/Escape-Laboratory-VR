@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.sentryvr.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "F:\\Github\\SentryVR\\SentryVR\\SentryVR\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Github\\SentryVR\\SentryVR\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "SentryVR [Testing]"

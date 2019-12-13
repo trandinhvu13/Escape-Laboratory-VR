@@ -5,7 +5,12 @@ using UnityEngine.AI;
 
 public class BomberController : Target
 {
-    public float lookRadius = 7f;
+    //Player
+    public Player player;
+    public GameObject Player;
+
+    public Transform playerPos;
+    public float lookRadius = 1f;
     private Renderer rend = null;
     // Navmesh
     Transform target;
@@ -22,10 +27,12 @@ public class BomberController : Target
     void Start()
     {
         ResetValue();
+        Player = GameObject.FindGameObjectWithTag("Player");
+        player = Player.GetComponent<Player>();
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         rend = GetComponent<Renderer>();
-
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         distance = Vector3.Distance(target.position, transform.position);
         originalSpeed = agent.speed;
         Debug.Log("Agent speed is " + originalSpeed);
@@ -92,7 +99,7 @@ public class BomberController : Target
         isDetected = true;
 
         agent.SetDestination(target.position);
-        agent.speed = 5f;
+        agent.speed = 3f;
         Debug.Log("I have changed my speed");
         if (distance <= agent.stoppingDistance)
         {
@@ -129,6 +136,7 @@ public class BomberController : Target
         if (collision.gameObject.CompareTag("Player"))
         {
             agent.isStopped = true;
+            Debug.Log("Da dung");
             StartCoroutine("Explode");
         } else if (collision.gameObject.CompareTag("Projectile"))
         {
@@ -152,9 +160,22 @@ public class BomberController : Target
     protected IEnumerator Explode()
     {
         InvokeRepeating("Blink", 0f, 0.2f);
-        WaitForSeconds wait = new WaitForSeconds(2.0f);
+        WaitForSeconds wait = new WaitForSeconds(1.5f);
         yield return wait;
-        Destroy(gameObject);
+        float distanceToEnemy = Vector3.Distance(transform.position, playerPos.position);
+        if (distanceToEnemy <= lookRadius)
+        {
+            Debug.Log("Damage Player");
+            player.currentHealth  = player.currentHealth - 20;
+            Destroy(gameObject);
+        }
+        else
+        {
+            Debug.Log("Ko damage player");
+            Destroy(gameObject);
+        }
+
+        
     }
 
     private void Blink()

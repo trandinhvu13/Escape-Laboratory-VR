@@ -44,6 +44,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretOrigin: {fileID: 9163879521397873182}
+--- !u!1 &1000514221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1000514222}
+  m_Layer: 0
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1000514222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000514221}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.24, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9163879521397873182}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1996695377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1996695378}
+  m_Layer: 0
+  m_Name: Barrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1996695378
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996695377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: -0, z: 16.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5670674432181756084}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &486641136600124368
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +227,7 @@ GameObject:
   - component: {fileID: 1128766533809080427}
   - component: {fileID: 5824261586326905912}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: Turret body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +243,8 @@ Transform:
   m_LocalRotation: {x: 0.00000014901161, y: 0.000000059604645, z: -0.7071068, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0.7403928, z: 1.8393271}
   m_LocalScale: {x: 0.044139657, y: 0.04413965, z: 0.044139657}
-  m_Children: []
+  m_Children:
+  - {fileID: 1996695378}
   m_Father: {fileID: 2919814220064744417}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -246,6 +307,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9163879521397873182}
   - component: {fileID: 8223745074888934868}
+  - component: {fileID: 896029822}
+  - component: {fileID: 896029823}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -267,6 +330,7 @@ Transform:
   - {fileID: 2919814220064744417}
   - {fileID: 574689111429038745}
   - {fileID: 14134518}
+  - {fileID: 1000514222}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -282,6 +346,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3478a5c7841711a42b45f06bf2317b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoutPoint: {fileID: 14134518}
+  m_FlashDamageColor: {r: 1, g: 1, b: 1, a: 1}
+  m_MaxHealth: 20
+  m_Health: 20
+  mainObject: {fileID: 4975823367678471390}
+  followpoint: {fileID: 14134519}
+  scoutPoint: {fileID: 0}
+  player: {fileID: 0}
   range: 15
   partToRotate: {fileID: 2919814220064744417}
+  isDetected: 0
+  moveForce: 1000
+  bullet: {fileID: 4043552858662950561, guid: 5a1e31c219ad89545a5384181a7751f4, type: 3}
+  gun: {fileID: 1996695378}
+  shootRate: 1
+  shootForce: 1000
+  raycastOrigin: {fileID: 1996695377}
+  ren: {fileID: 0}
+  turretBody: {fileID: 4975823367678471390}
+  mat: []
+--- !u!65 &896029822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5293974798105536525}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.6466214, z: 1}
+  m_Center: {x: 0, y: 0.3236019, z: 0}
+--- !u!65 &896029823
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5293974798105536525}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5089476, y: 1.0512103, z: 1}
+  m_Center: {x: -0.011206572, y: 1.1781887, z: 0}

@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shootable
+  - Projectile
+  - wall
+  - Bomber
+  - Key
+  - TProjectile
   layers:
   - Default
   - TransparentFX
@@ -15,9 +20,9 @@ TagManager:
   - 
   - 
   - Lighting
-  - 
-  - 
-  - 
+  - Wall
+  - Bomber
+  - Turret
   - 
   - 
   - 

@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Turret : Target
 {
+    // Basic Movement
+    [Header("Rotate")]
+    public CircularMovement followpoint;
     public Transform scoutPoint;
-
     public Transform player;
-
     public float range = 15f;
-
     public Transform partToRotate;
+    public bool isDetected = false;
+
+    // Shoot manager
+    [Header("Shoot")]
+    public float moveForce;
+    public GameObject bullet;
+    public Transform gun;
+    public float shootRate;
+    public float shootForce;
+    private float m_shootRateTimeStamp;
+
+    [Header("Raycast")]
+    //Raycast
+    public GameObject raycastOrigin;
+    private float sightLength = 15f;
 
     //Meshrenderer
+    [Header("Renderer")]
     public MeshRenderer ren;
     public GameObject turretBody;
     public Material[] mat;
@@ -21,13 +37,14 @@ public class Turret : Target
     void Start()
     {
         ResetValue();
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Standby();
+        DetectPlayer();
     }
     public void ResetValue()
     {
@@ -52,9 +69,9 @@ public class Turret : Target
         mat[1].color = m_OriginalColor;
     }
 
-    private new void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collision other)
     {
-        if (collision.gameObject.CompareTag("Projectile"))
+        if (other.gameObject.CompareTag("Projectile"))
         {
             Damage();
 
@@ -62,13 +79,10 @@ public class Turret : Target
 
     }
 
-    void UpdateTarget()
-    {
 
-    }
-
-    void Standby()
+    public void Standby()
     {
+        
         Vector3 dir = scoutPoint.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 turretRotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * 13f).eulerAngles;
@@ -82,4 +96,37 @@ public class Turret : Target
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
+    private void DetectPlayer()
+    {
+        RaycastHit hit;
+        Vector3 fwd = raycastOrigin.transform.TransformDirection(Vector3.forward);
+        Ray eyeRay = new Ray(raycastOrigin.transform.position, fwd);
+        Debug.DrawRay(raycastOrigin.transform.position, fwd * sightLength);
+        
+        if (Physics.Raycast(eyeRay, out hit, sightLength)&& hit.collider.CompareTag("Player"))
+        {
+            followpoint.gameObject.SetActive(false);
+            scoutPoint = hit.collider.gameObject.transform;
+            Shoot();
+        }
+        else
+        {
+            followpoint.gameObject.SetActive(true);
+            scoutPoint = gameObject.transform.Find("StandbyPoint");
+            Standby();
+        }
+    }
+
+    private void Shoot()
+    {
+        
+        Standby();
+        if (Time.time > m_shootRateTimeStamp)
+        {
+            GameObject go = (GameObject)Instantiate(bullet, gun.position, gun.rotation);
+
+            go.GetComponent<Rigidbody>().AddForce(gun.forward * shootForce);
+            m_shootRateTimeStamp = Time.time + shootRate;
+        }
+    }
 }
