@@ -11,7 +11,7 @@ public class TurretBullet : MonoBehaviour
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         player = Player.GetComponent<Player>();
-        Destroy(gameObject, 3);
+        Destroy(gameObject, 2);
     }
 
     private void Update()
@@ -22,7 +22,7 @@ public class TurretBullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            player.currentHealth -= 20;
+            player.currentHealth -= 1;
         }
     }
 }

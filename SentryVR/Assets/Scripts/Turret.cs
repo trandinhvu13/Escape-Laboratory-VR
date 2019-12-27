@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Turret : Target
 {
+    public AudioSource shootSound;
     // Basic Movement
     [Header("Rotate")]
     public CircularMovement followpoint;
@@ -69,15 +70,7 @@ public class Turret : Target
         mat[1].color = m_OriginalColor;
     }
 
-    private void OnTriggerEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Projectile"))
-        {
-            Damage();
-
-        }
-
-    }
+    
 
 
     public void Standby()
@@ -123,6 +116,7 @@ public class Turret : Target
         Standby();
         if (Time.time > m_shootRateTimeStamp)
         {
+            shootSound.Play();
             GameObject go = (GameObject)Instantiate(bullet, gun.position, gun.rotation);
 
             go.GetComponent<Rigidbody>().AddForce(gun.forward * shootForce);

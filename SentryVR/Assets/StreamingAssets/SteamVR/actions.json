@@ -55,6 +55,18 @@
       "requirement": "mandatory"
     },
     {
+      "name": "/actions/default/in/PauseMenu",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/ExitGame",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/ResumeGame",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },

@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class BomberController : Target
 {
+    public AudioSource explodeSound;
+    public AudioSource finalSound;
     //Player
     public Player player;
     public GameObject Player;
@@ -159,19 +161,27 @@ public class BomberController : Target
 
     protected IEnumerator Explode()
     {
+        explodeSound.Play();
         InvokeRepeating("Blink", 0f, 0.2f);
         WaitForSeconds wait = new WaitForSeconds(1.5f);
         yield return wait;
+        
         float distanceToEnemy = Vector3.Distance(transform.position, playerPos.position);
         if (distanceToEnemy <= lookRadius)
         {
             Debug.Log("Damage Player");
             player.currentHealth  = player.currentHealth - 20;
+            rend.enabled = false;
+            finalSound.Play();
+            yield return new WaitForSeconds(0.5f);
             Destroy(gameObject);
         }
         else
         {
             Debug.Log("Ko damage player");
+            rend.enabled = false;
+            finalSound.Play();
+            yield return new WaitForSeconds(0.5f);
             Destroy(gameObject);
         }
 

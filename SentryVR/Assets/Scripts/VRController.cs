@@ -5,6 +5,8 @@ using Valve.VR;
 
 public class VRController : MonoBehaviour
 {
+    
+
     public float m_Gravity = 30.0f;
     public float m_Sentivity = 0.1f;
     public float m_MaxSpeed = 1.0f;
@@ -28,10 +30,16 @@ public class VRController : MonoBehaviour
         m_CharacterController = GetComponent<CharacterController>();
     }
 
+    private void FixedUpdate()
+    {
+       
+    }
+
     void Start()
     {
         m_CameraRig = SteamVR_Render.Top().origin;
         m_Head = SteamVR_Render.Top().head;
+        
     }
 
 
@@ -116,6 +124,8 @@ public class VRController : MonoBehaviour
 
         transform.RotateAround(m_Head.position, Vector3.up, snapValue);
     }
+
+    
 
 
 }
