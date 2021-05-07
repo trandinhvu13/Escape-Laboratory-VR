@@ -2,7 +2,7 @@
 
 ## Introduction
 This game was made for a college assignment.<br/> 
-It was also the first time I was exposed to Unity Engine and C# and start learning them from the ground up.<br/>  
+It was also the first time I was exposed to Unity Engine and C# and start learning them from the ground up.<br/>
 The game was gone through many versions and designs but in the end it was never finished and only usable for demonstation in class.<br/>
 
 ## About the game
