@@ -12,16 +12,16 @@ There will be enemies wandering around the maze, use your gun to shoot them.
 
 ## Preview picture:
 <p align="center">
-  <img src="https://ibb.co/7X6Gy26" alt="Sublime's custom image"/>
+  <img src="https://i.ibb.co/42zYSp6/2.png" alt="Welcome Screen"/>
 </p>
 <p align="center">
-  <img src="https://ibb.co/LrmJg1L" alt="Sublime's custom image"/>
+  <img src="https://i.ibb.co/475jNP5/1.png" alt="Map Overview"/>
 </p>
 <p align="center">
-  <img src="https://ibb.co/Ntqd1dm" alt="Sublime's custom image"/>
+  <img src="https://i.ibb.co/n6yN3Nn/3.png" alt="Enemies Wandering Around"/>
 </p>
 <p align="center">
-  <img src="https://ibb.co/9ywkd9qe" alt="Sublime's custom image"/>
+  <img src="https://i.ibb.co/1Rst4f9/4.png" alt="View From First-Person POV"/>
 </p>
 
 
