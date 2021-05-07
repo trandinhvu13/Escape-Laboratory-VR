@@ -10,7 +10,7 @@ You are stuck in a Pac-man-like maze lab and your mission is to find all the key
 You will have a gun and a radar tablet indicating the position of the keys.<br/>
 There will be enemies wandering around the maze, use your gun to shoot them.<br/>
 
-## Preview picture
+## Previews
 <p align="center">
   <img src="https://i.ibb.co/n6yN3Nn/3.png" alt="Welcome Screen"/>
 </p>
